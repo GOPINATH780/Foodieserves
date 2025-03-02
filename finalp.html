@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>FoodieServes</title>
+    <link rel="stylesheet" href="finalp.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="finalp.js"></script>
+    <script defer src="cart.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <nav class="navbar">
+        <h1 class="logo">FoodieServes</h1>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="#">Home</a></li>
+            <li><a href="#menu">Menu</a></li>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="nav-right">
+            <a href="cart.html" class="cart-icon">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+        <div class="admin-icon">
+            <i class="fa fa-user"></i>
+            <div class="admin-dropdown">
+                <a href="profile.html">Dashboard</a>
+                <a href="#" onclick="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Delicious Food, Delivered Fast!</h1>
+            <p>Order from the best restaurants near you.</p>
+            <div class="search-container">
+                <input type="text" placeholder="Search for food..." class="search-box">
+                <button class="search-button"><i class="fa fa-search"></i></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories -->
+    <section class="categories">
+        <h2>Popular Categories</h2>
+        <div class="category-container">
+            <div class="category">
+                <img src="images/Fast food.jpg" alt="fast food">
+                <p>Fast Food</p>
+            </div>
+            <div class="category">
+                <img src="images/Healthy food.jpg" alt="healthy food">
+                <p>Healthy Food</p>
+            </div>
+            <div class="category">
+                <img src="images/Dessert.jpg" alt="Desserts">
+                <p>Desserts</p>
+            </div>
+            <div class="category">
+                <img src="images/Drinks.jpg" alt="Drinks">
+                <p>Drinks</p>
+            </div>
+        </div>
+    </section>
+    <!-- Food Menu Section -->
+
+    <section class="food-menu" id="menu">
+        <h1>Our Delicious Menu</h1>
+        <h2>Breakfast</h2>
+        <div class="menu-container">
+    
+            <!-- Food Item 1 -->
+            <div class="food-item">
+                <img src="images/idli.jpg" alt="Idli Sambar">
+                <h3>Idli Sambar</h3>
+                <p>Soft steamed rice cakes served with lentil soup and chutney.</p>
+                <span class="price">₹120</span>
+                <div class="button-container">
+                    <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                    <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+                </div>
+            </div>
+    
+            <!-- Food Item 2 -->
+            <div class="food-item">
+                <img src="images/poha.jpg" alt="Poha">
+                <h3>Poha</h3>
+                <p>Flattened rice cooked with onions, mustard seeds, and fresh coriander.</p>
+                <span class="price">₹90</span>
+                <div class="button-container">
+                    <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                    <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+                </div>
+            </div>
+    
+            <!-- Food Item 3 -->
+            <div class="food-item">
+                <img src="images/paratha.jpg" alt="Aloo Paratha">
+                <h3>Aloo Paratha</h3>
+                <p>Whole wheat stuffed flatbread with spiced mashed potatoes and butter.</p>
+                <span class="price">₹140</span>
+                <div class="button-container">
+                    <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                    <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+                </div>
+            </div>
+    
+            <!-- Food Item 4 -->
+            <div class="food-item">
+                <img src="images/dosa.jpg" alt="Masala Dosa">
+                <h3>Masala Dosa</h3>
+                <p>Thin and crispy fermented rice crepe filled with spiced potato stuffing.</p>
+                <span class="price">₹160</span>
+                <div class="button-container">
+                    <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                    <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+                </div>
+            </div>
+    
+            <!-- Food Item 5 -->
+            <div class="food-item">
+                <img src="images/upma.jpg" alt="Upma">
+                <h3>Upma</h3>
+                <p>A savory semolina dish cooked with veggies and mild spices.</p>
+                <span class="price">₹100</span>
+                <div class="button-container">
+                    <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                    <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+<section class="food-menu" id="menu">
+    <h2>Fast Food</h2>
+    <div class="menu-container">
+                                                    
+        <!-- Food Item 1 -->
+        <div class="food-item">
+            <img src="images/pizza.jpg" alt="Pizza">
+            <h3>Cheese Pizza</h3>
+            <p>A delicious cheesy pizza with a crispy crust.</p>
+            <span class="price">₹250</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 2 -->
+        <div class="food-item">
+            <img src="images/burger.jpg" alt="Burger">
+            <h3>Crispy Chicken Burger </h3>
+            <p>Juicy chicken patty,fresh veggies and special sauce in a soft bun.</p>
+            <div class="price">₹180</div>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 3 -->
+        <div class="food-item">
+            <img src="images/french fries.jpg" alt="Pasta">
+            <h3>Loaded French Fries</h3>
+            <p>Crispy fries topped with cheese,jalapeños,and tangy sauces.</p>
+            <span class="price">₹120</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 4 -->
+        <div class="food-item">
+            <img src="images/chicken wrap.jpg" alt="Salad">
+            <h3>Grilled Chicken Wrap </h3>
+            <p>Succulent grilled chicken with fresh veggies in a soft tortilla.</p>
+            <span class="price">₹220</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 5 -->
+        <div class="food-item">
+            <img src="images/bbq.jpg" alt="Ice Cream">
+            <h3>BBQ Chicken Wings</h3>
+            <p>Smoky, spicy, and perfectly glazed BBQ chicken wings.</p>
+            <span class="price">₹280</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 6 -->
+        <div class="food-item">
+            <img src="images/" alt="Coffee">
+            <h3>Cheesy Garlic Bread</h3>
+            <p>Warm, crispy garlic bread loaded with melted cheese.</p>
+            <span class="price">₹100</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+<section class="food-menu" id="menu">
+<h2>Healthy Food</h2>
+<div class="menu-container">
+    
+   <!-- Food Item 1 -->
+<div class="food-item">
+    <img src="moong_dal_chilla.jpg" alt="Moong Dal Chilla">
+    <h3>Moong Dal Chilla</h3>
+    <p>Protein-rich lentil pancakes with chutney.</p>
+    <span class="price">₹150</span>
+    <div class="button-container">
+        <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+        <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- Food Item 2 -->
+<div class="food-item">
+    <img src="sprout_salad.jpg" alt="Sprout Salad">
+    <h3>Sprout Salad</h3>
+    <p>A crunchy mix of sprouts, veggies, and lemon.</p>
+    <span class="price">₹120</span>
+    <div class="button-container">
+        <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+        <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- Food Item 3 -->
+<div class="food-item">
+    <img src="ragi_dosa.jpg" alt="Ragi Dosa">
+    <h3>Ragi Dosa</h3>
+    <p>Crispy dosa made with nutritious ragi flour.</p>
+    <span class="price">₹180</span>
+    <div class="button-container">
+        <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+        <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- Food Item 4 -->
+<div class="food-item">
+    <img src="paneer_bhurji.jpg" alt="Paneer Bhurji">
+    <h3>Paneer Bhurji</h3>
+    <p>Scrambled paneer with mild spices and veggies.</p>
+    <span class="price">₹200</span>
+    <div class="button-container">
+        <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+        <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- Food Item 5 -->
+<div class="food-item">
+    <img src="khichdi_bowl.jpg" alt="Khichdi Bowl">
+    <h3>Khichdi Bowl</h3>
+    <p>A wholesome mix of rice, lentils, and ghee.</p>
+    <span class="price">₹170</span>
+    <div class="button-container">
+        <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+        <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+    </div>
+</div>
+
+<!-- Food Item 6 -->
+<div class="food-item">
+    <img src="masala_buttermilk.jpg" alt="Masala Buttermilk">
+    <h3>Masala Buttermilk</h3>
+    <p>Refreshing spiced buttermilk for digestion.</p>
+    <span class="price">₹90</span>
+    <div class="button-container">
+        <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+        <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+    </div>
+</div>
+
+</div>
+</section>
+ <section class="food-menu" id="menu">
+    <h2>Desserts</h2>
+    <div class="menu-container">
+        
+        <!-- Food Item 1 -->
+        <div class="food-item">
+            <img src="pizza.jpg" alt="Pizza">
+            <h3>Chocolate Lava Cake</h3>
+            <p>Warm, gooey chocolate cake with a molten center.</p>
+            <span class="price">₹199</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 2 -->
+        <div class="food-item">
+            <img src="pizza.jpg" alt="Burger">
+            <h3>Classic Tiramisu</h3>
+            <p>Layers of coffee-soaked sponge and mascarpone cream.</p>
+            <span class="price">₹280</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 3 -->
+        <div class="food-item">
+            <img src="images/strawberry cheesecake.jpg" alt="strawberry cheescake">
+            <h3>Strawberry Cheesecake</h3>
+            <p>Creamy cheesecake with fresh strawberry topping.</p>
+            <span class="price">₹165</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 4 -->
+        <div class="food-item">
+            <img src="images/brownie.jpg" alt="brownie sundae">
+            <h3>Brownie Sundae</h3>
+            <p> Fudgy brownie with ice cream, chocolate sauce, and nuts.</p>
+            <span class="price">₹500</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 5 -->
+        <div class="food-item">
+            <img src="images/Chocolate ice cream.jpg" alt="chocolate ice Cream">
+            <h3>Chocolate Ice Cream</h3>
+            <p>Creamy and rich chocolate ice cream.</p>
+            <span class="price">₹80</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+        <!-- Food Item 6 -->
+        <div class="food-item">
+            <img src="pizza.jpg" alt="Coffee">
+            <h3>Mango Mousse</h3>
+            <p>A light and airy mango-flavored dessert.</p>
+            <span class="price">₹160</span>
+            <div class="button-container">
+                <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+            </div>
+        </div>
+
+    </div>
+</section>
+</section>
+<section class="food-menu" id="menu">
+   <h2>Drinks</h2>
+   <div class="menu-container">
+       
+       <!-- Food Item 1 -->
+       <div class="food-item">
+           <img src="images/cold coffe.jpg" alt="cold coffee">
+           <h3>Classic Cold Coffee</h3>
+           <p>Chilled and creamy coffee blended to perfection.</p>
+           <span class="price">₹150</span>
+           <div class="button-container">
+               <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+               <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+           </div>
+       </div>
+
+       <!-- Food Item 2 -->
+       <div class="food-item">
+           <img src="images/watermelon.jpg" alt="watermelon juice">
+           <h3>Fresh Watermelon Juice </h3>
+           <p>Refreshing, naturally sweet watermelon juice.</p>
+           <span class="price">₹100</span>
+           <div class="button-container">
+               <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+               <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+           </div>
+       </div>
+
+       <!-- Food Item 3 -->
+       <div class="food-item">
+           <img src="images/lemon tea.jpg" alt="lemon tea">
+           <h3>Iced Lemon Tea</h3>
+           <p>Cool and refreshing lemon-infused iced tea.</p>
+           <span class="price">₹119</span>
+           <div class="button-container">
+               <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+               <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+           </div>
+       </div>
+
+       <!-- Food Item 4 -->
+       <div class="food-item">
+           <img src="images/mango lassi.jpg" alt="mango lassi">
+           <h3>Mango Lassi</h3>
+           <p>A rich and creamy yogurt-based mango drink.</p>
+           <span class="price">₹160</span>
+           <div class="button-container">
+               <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+               <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+           </div>
+       </div>
+
+           <!-- Food Item 5 -->
+           <div class="food-item">
+               <img src="images/hotchocolate.jpg" alt="hot chocolate">
+               <h3>Hot Chocolate</h3>
+               <p>A velvety hot cocoa topped with whipped cream.</p>
+               <span class="price">₹130</span>
+               <div class="button-container">
+                   <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                   <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+               </div>
+           </div>
+
+           <!-- Food Item 6 -->
+           <div class="food-item">
+               <img src="images/cuppacino.jpg" alt="Cappuccino">
+               <h3>Hot Cappuccino</h3>
+               <p>Freshly brewed coffee with frothy milk.</p>
+               <span class="price">₹260</span>
+               <div class="button-container">
+                   <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                   <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+               </div>
+           </div>
+
+            <!-- Food Item 7-->
+            <div class="food-item">
+                <img src="images/chai.jpg" alt="Masala Chai">
+                <h3>Masala Chai</h3>
+                <p>Traditional spiced tea brewed with aromatic Indian spices.</p>
+                <span class="price">₹50</span>
+                <div class="button-container">
+                    <button class="buy-btn" onclick="buyNow(this.parentElement.parentElement)">Buy Now</button>
+                    <button class="buy-btn" onclick="addToCart(this.parentElement.parentElement)">Add to Cart</button>
+                </div>
+            </div>
+
+       </div>
+    </section>
+    <!-- Testimonials -->
+    <section class="testimonials">
+        <h2>What Our Customers Say</h2>
+        <div class="testimonial-container">
+            <div class="testimonial">
+                <p>"Amazing food and quick delivery!"</p>
+                <span>- John Doe</span>
+            </div>
+            <div class="testimonial">
+                <p>"Great service and delicious meals!"</p>
+                <span>- Jane Smith</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+    <p>© 2024 FoodieServes. All rights reserved.</p>
+    </footer>
+
+    <style>
+        .admin-icon {
+            position: relative;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+
+        .admin-icon i {
+            font-size: 24px;
+            color: #ff4757;
+            transition: color 0.3s ease;
+        }
+
+        .admin-icon:hover i {
+            color: #ff6b81;
+        }
+
+        .admin-dropdown {
+            position: absolute;
+            top: 100%;
+            right: 0;
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            padding: 10px 0;
+            min-width: 180px;
+            display: none;
+            z-index: 1000;
+        }
+
+        .admin-icon:hover .admin-dropdown {
+            display: block;
+        }
+
+        .admin-dropdown a {
+            display: block;
+            padding: 10px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s ease;
+        }
+
+        .admin-dropdown a:hover {
+            background-color: #f8f9fa;
+            color: #ff4757;
+        }
+    </style>
+
+    <script>
+        // Add this function to load user data
+        function loadUserData() {
+            const userAddress = sessionStorage.getItem('userAddress');
+            if (userAddress) {
+                const addressInput = document.getElementById('address');
+                if (addressInput) {
+                    addressInput.value = userAddress;
+                }
+            }
+        }
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            // Remove notification after 3 seconds
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.5s forwards';
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 3000);
+        }
+
+        function logout() {
+            sessionStorage.clear();
+            showNotification('Successfully logged out!');
+            setTimeout(() => {
+                window.location.href = 'landing.html';
+            }, 1000);
+        }
+
+        // Call this function when page loads
+        document.addEventListener('DOMContentLoaded', loadUserData);
+    </script>
+
+</body>
+</html>
