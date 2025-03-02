@@ -1,0 +1,133 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Get cart items from localStorage instead of sessionStorage
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        if (cartItems.length > 0) {
+            displayOrderDetails(cartItems);
+            updatePriceDetails(cartItems);
+        } else {
+            // Redirect back to menu if cart is empty
+            window.location.href = 'finalp.html';
+        }
+    });
+
+    function handlePaymentSuccess(response, cartItems) {
+        try {
+            const orderId = 'ORD' + Date.now() + Math.random().toString(36).substr(2, 5);
+            
+            // Calculate totals for all cart items
+            const subtotal = cartItems.reduce((total, item) => {
+                const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+                return total + (price * item.quantity);
+            }, 0);
+            const deliveryFee = 40;
+            const total = subtotal + deliveryFee;
+
+            // Create order object with all cart items
+            const order = {
+                orderId: orderId,
+                items: cartItems.map(item => ({
+                    name: item.name,
+                    price: parseFloat(item.price.replace(/[^\d.]/g, '')),
+                    image: item.image,
+                    description: item.description,
+                    quantity: item.quantity
+                })),
+                paymentId: response.razorpay_payment_id,
+                date: new Date().toISOString(),
+                status: 'Processing',
+                subtotal: subtotal,
+                deliveryFee: deliveryFee,
+                total: total,
+                paymentMethod: 'Razorpay'
+            };
+
+            // Save to order history
+            let orderHistory = JSON.parse(localStorage.getItem('orderHistory')) || [];
+            orderHistory.push(order);
+            localStorage.setItem('orderHistory', JSON.stringify(orderHistory));
+
+            console.log('Order saved:', order); // Debug log
+
+            // Clear cart instead of buy now item
+            localStorage.removeItem('cartItems');
+
+            // Show success message
+            alert(`Order placed successfully!\nOrder ID: ${orderId}\nTotal Amount: ₹${total}`);
+
+            // Redirect to order confirmation
+            setTimeout(() => {
+                window.location.href = 'order-confirmation.html';
+            }, 1500);
+
+        } catch (error) {
+            console.error('Error in handlePaymentSuccess:', error);
+            alert('There was an error processing your order. Please contact support.');
+        }
+    }
+
+    function displayOrderDetails(cartItems) {
+        const orderDetailsHtml = cartItems.map(item => `
+            <div class="order-item">
+                <img src="${item.image}" alt="${item.name}">
+                <div class="order-info">
+                    <h3>${item.name}</h3>
+                    <p>${item.description}</p>
+                    <p class="price">${item.price}</p>
+                    <p>Quantity: ${item.quantity}</p>
+                </div>
+            </div>
+        `).join('');
+        
+        document.getElementById('orderDetails').innerHTML = orderDetailsHtml;
+    }
+
+    function updatePriceDetails(cartItems) {
+        const subtotal = cartItems.reduce((total, item) => {
+            const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+            return total + (price * item.quantity);
+        }, 0);
+        const deliveryFee = 40;
+        const total = subtotal + deliveryFee;
+
+        document.getElementById('subtotal').textContent = `₹${subtotal.toFixed(2)}`;
+        document.getElementById('deliveryFee').textContent = `₹${deliveryFee.toFixed(2)}`;
+        document.getElementById('totalAmount').textContent = `₹${total.toFixed(2)}`;
+    }
+
+    function openRazorpay() {
+        const cartItems = JSON.parse(localStorage.getItem('cartItems')) || [];
+        if (cartItems.length === 0) {
+            console.error('Cart is empty');
+            return;
+        }
+
+        const subtotal = cartItems.reduce((total, item) => {
+            const price = parseFloat(item.price.replace(/[^\d.]/g, ''));
+            return total + (price * item.quantity);
+        }, 0);
+        const total = subtotal + 40; // Including delivery fee
+
+        const options = {
+            key: 'rzp_test_Q4yKwuiGEyv53i',
+            amount: total * 100,
+            currency: 'INR',
+            name: 'FoodieServes',
+            description: `Cart Order (${cartItems.length} items)`,
+            handler: function(response) {
+                handlePaymentSuccess(response, cartItems);
+            },
+            prefill: {
+                name: sessionStorage.getItem('userName'),
+                email: sessionStorage.getItem('userEmail'),
+                contact: sessionStorage.getItem('userPhone')
+            },
+            theme: {
+                color: '#ff4757'
+            }
+        };
+
+        const rzp = new Razorpay(options);
+        rzp.open();
+    }
+</script> 
