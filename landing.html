@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to FoodieServes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 20px 50px;
+            background-color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #ff4757;
+        }
+
+        .nav-buttons {
+            display: flex;
+            gap: 20px;
+        }
+
+        .nav-btn {
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .login-btn {
+            background: none;
+            border: 2px solid #ff4757;
+            color: #ff4757;
+        }
+
+        .signup-btn {
+            background: #ff4757;
+            border: none;
+            color: white;
+        }
+
+        .nav-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 2px 8px rgba(255,71,87,0.3);
+        }
+
+        .hero-section {
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 0 50px;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        url('images/Landing.jpg');
+            background-size: cover;
+            background-position: center;
+            color: white;
+        }
+
+        .hero-content {
+            max-width: 600px;
+        }
+
+        .hero-title {
+            font-size: 48px;
+            color: white;
+            margin-bottom: 20px;
+        }
+
+        .hero-subtitle {
+            font-size: 20px;
+            color: white;
+            margin-bottom: 30px;
+            line-height: 1.6;
+        }
+
+        .cta-btn {
+            padding: 15px 30px;
+            font-size: 18px;
+            border-radius: 30px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .cta-btn:hover {
+            background: #ff6b81;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(255,71,87,0.3);
+        }
+        .cta-btn a{
+            text-decoration: none;
+        }
+
+        .features {
+            padding: 80px 50px;
+            background: #f8f9fa;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature-card {
+            padding: 30px;
+            background: white;
+            border-radius: 10px;
+            text-align: center;
+            transition: transform 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .feature-icon {
+            font-size: 40px;
+            color: #ff4757;
+            margin-bottom: 20px;
+        }
+
+        .feature-title {
+            font-size: 20px;
+            color: #333;
+            margin-bottom: 15px;
+        }
+
+        .feature-description {
+            color: #666;
+            line-height: 1.6;
+        }
+
+        footer {
+            background: #333;
+            color: white;
+            padding: 40px 50px;
+            text-align: center;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .social-links {
+            margin-top: 20px;
+        }
+
+        .social-links a {
+            color: white;
+            margin: 0 10px;
+            font-size: 20px;
+            text-decoration: none;
+        }
+
+        /* Featured Foods Section */
+        .featured-foods {
+            padding: 80px 50px;
+            background: white;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 36px;
+            color: #333;
+            margin-bottom: 40px;
+        }
+
+        .food-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .food-card {
+            position: relative;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            transition: transform 0.3s ease;
+        }
+
+        .food-card:hover {
+            transform: translateY(-10px);
+        }
+
+        .food-card img {
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+        }
+
+        .food-info {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent, rgba(0,0,0,0.8));
+            color: white;
+        }
+
+        .food-info h3 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .food-info p {
+            font-size: 16px;
+            opacity: 0.9;
+        }
+
+        /* Add a categories section */
+        .categories {
+            padding: 60px 50px;
+            background: #f8f9fa;
+        }
+
+        .category-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .category-item {
+            text-align: center;
+            padding: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .category-icon {
+            font-size: 32px;
+            margin-bottom: 10px;
+            color: #ff4757;
+        }
+
+        /* Add this section after the featured foods */
+        .testimonials {
+            padding: 80px 50px;
+            background: white;
+            overflow: hidden;
+        }
+
+        .testimonial-slider {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+        }
+
+        .testimonial-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .testimonial-slide {
+            min-width: 100%;
+            padding: 30px;
+            text-align: center;
+            opacity: 0;
+            transition: opacity 0.5s ease;
+        }
+
+        .testimonial-slide.active {
+            opacity: 1;
+        }
+
+        .testimonial-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin: 0 auto 20px;
+            object-fit: cover;
+        }
+
+        .testimonial-text {
+            font-style: italic;
+            color: #666;
+            margin-bottom: 20px;
+            font-size: 18px;
+            line-height: 1.6;
+        }
+
+        .testimonial-author {
+            font-weight: bold;
+            color: #333;
+            font-size: 16px;
+        }
+
+        .slider-dots {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+            gap: 10px;
+        }
+
+        .dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #ddd;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .dot.active {
+            background: #ff4757;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo">FoodieServes</div>
+        <div class="nav-buttons">
+            <button class="nav-btn login-btn" onclick="location.href='login.html'">Login</button>
+            <button class="nav-btn signup-btn" onclick="location.href='register.html'">Sign Up</button>
+        </div>
+    </nav>
+
+    <section class="hero-section">
+        <div class="hero-content">
+            <h1 class="hero-title">Delicious Food Delivered to Your Doorstep</h1>
+            <p class="hero-subtitle">Experience the best local restaurants and food items with our fast and reliable delivery service. Order now and satisfy your cravings!</p>
+            <button class="cta-btn" onclick="sign()">Get started</button>
+        </div>
+    </section>
+
+    <section class="featured-foods">
+        <h2 class="section-title">Popular Dishes</h2>
+        <div class="food-grid">
+            <div class="food-card">
+                <img src="images/burger.jpg" alt="Delicious Burger">
+                <div class="food-info">
+                    <h3>Gourmet Burgers</h3>
+                    <p>Juicy patties with fresh ingredients</p>
+                </div>
+            </div>
+            <div class="food-card">
+                <img src="images/pizza.jpg" alt="Fresh Pizza">
+                <div class="food-info">
+                    <h3>Italian Pizza</h3>
+                    <p>Wood-fired with premium toppings</p>
+                </div>
+            </div>
+            <div class="food-card">
+                <img src="images/pasta.jpg" alt="Pasta Dish">
+                <div class="food-info">
+                    <h3>Authentic Pasta</h3>
+                    <p>Handmade pasta with rich sauces</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="features">
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🍽️</div>
+                <h3 class="feature-title">Wide Selection</h3>
+                <p class="feature-description">Choose from hundreds of restaurants and thousands of menu items.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⚡</div>
+                <h3 class="feature-title">Fast Delivery</h3>
+                <p class="feature-description">Get your food delivered quickly with our efficient delivery network.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">💳</div>
+                <h3 class="feature-title">Easy Payment</h3>
+                <p class="feature-description">Multiple payment options for your convenience and security.</p>
+            </div>
+            <div class="feature-card">
+                <div class="feature-icon">⭐</div>
+                <h3 class="feature-title">Best Quality</h3>
+                <p class="feature-description">We partner with only the best restaurants to ensure quality.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="categories">
+        <h2 class="section-title">Food Categories</h2>
+        <div class="category-grid">
+            <div class="category-item">
+                <div class="category-icon">🍔</div>
+                <h3>Fast Food</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">🍕</div>
+                <h3>Italian</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">🍜</div>
+                <h3>Asian</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">🥗</div>
+                <h3>Healthy</h3>
+            </div>
+            <div class="category-item">
+                <div class="category-icon">🍰</div>
+                <h3>Desserts</h3>
+            </div>
+        </div>
+    </section>
+
+    <section class="testimonials">
+        <h2 class="section-title">What Our Customers Say</h2>
+        <div class="testimonial-slider">
+            <div class="testimonial-container">
+                <div class="testimonial-slide">
+                    <img src="images/customer1.jpg" alt="Customer" class="testimonial-image">
+                    <p class="testimonial-text">"Amazing food and quick delivery! The best food delivery service I've used."</p>
+                    <p class="testimonial-author">- Sarah Johnson</p>
+                </div>
+                <div class="testimonial-slide">
+                    <img src="images/customer2.jpg" alt="Customer" class="testimonial-image">
+                    <p class="testimonial-text">"Great variety of restaurants and excellent customer service."</p>
+                    <p class="testimonial-author">- Mike Thompson</p>
+                </div>
+                <div class="testimonial-slide">
+                    <img src="images/customer3.jpg" alt="Customer" class="testimonial-image">
+                    <p class="testimonial-text">"Fresh food, on-time delivery, and reasonable prices. Highly recommended!"</p>
+                    <p class="testimonial-author">- Emily Davis</p>
+                </div>
+            </div>
+            <div class="slider-dots"></div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <p>© 2024 FoodieServes. All rights reserved.</p>
+            <div class="social-links">
+                <a href="#"><i class="fab fa-facebook"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Font Awesome for icons -->
+    <script src="https://kit.fontawesome.com/your-kit-code.js" crossorigin="anonymous"></script>
+
+    <!-- Add this JavaScript before the closing body tag -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.testimonial-container');
+            const slides = document.querySelectorAll('.testimonial-slide');
+            const dotsContainer = document.querySelector('.slider-dots');
+            let currentSlide = 0;
+
+            // Create dots
+            slides.forEach((_, index) => {
+                const dot = document.createElement('div');
+                dot.classList.add('dot');
+                if (index === 0) dot.classList.add('active');
+                dot.addEventListener('click', () => goToSlide(index));
+                dotsContainer.appendChild(dot);
+            });
+
+            // Show initial slide
+            slides[0].classList.add('active');
+
+            function updateSlides() {
+                // Update slides
+                slides.forEach(slide => slide.classList.remove('active'));
+                slides[currentSlide].classList.add('active');
+                
+                // Update container position
+                container.style.transform = `translateX(-${currentSlide * 100}%)`;
+                
+                // Update dots
+                const dots = document.querySelectorAll('.dot');
+                dots.forEach(dot => dot.classList.remove('active'));
+                dots[currentSlide].classList.add('active');
+            }
+
+            function goToSlide(index) {
+                currentSlide = index;
+                updateSlides();
+            }
+
+            function nextSlide() {
+                currentSlide = (currentSlide + 1) % slides.length;
+                updateSlides();
+            }
+
+            // Auto slide every 2 seconds
+            let slideInterval = setInterval(nextSlide, 2000);
+
+            // Pause on hover
+            const sliderElement = document.querySelector('.testimonial-slider');
+            sliderElement.addEventListener('mouseenter', () => {
+                clearInterval(slideInterval);
+            });
+
+            sliderElement.addEventListener('mouseleave', () => {
+                slideInterval = setInterval(nextSlide, 2000);
+            });
+
+            // Handle touch events for mobile
+            let touchStartX = 0;
+            let touchEndX = 0;
+
+            container.addEventListener('touchstart', (e) => {
+                touchStartX = e.touches[0].clientX;
+                clearInterval(slideInterval);
+            });
+
+            container.addEventListener('touchmove', (e) => {
+                touchEndX = e.touches[0].clientX;
+            });
+
+            container.addEventListener('touchend', () => {
+                const difference = touchStartX - touchEndX;
+                if (difference > 50) {
+                    // Swipe left
+                    currentSlide = (currentSlide + 1) % slides.length;
+                } else if (difference < -50) {
+                    // Swipe right
+                    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+                }
+                updateSlides();
+                slideInterval = setInterval(nextSlide, 2000);
+            });
+        });
+        function sign() {
+            window.location.href = 'register.html';
+        }
+    </script>
+</body>
+</html> 

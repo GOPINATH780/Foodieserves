@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart - FoodieServes</title>
+    <link rel="stylesheet" href="finalp.css">
+    <link rel="stylesheet" href="cart.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script defer src="finalp.js"></script>
+    <script defer src="cart.js"></script>
+    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+</head>
+<body>
+    <!-- Navbar (same as finalp.html) -->
+    <nav class="navbar">
+        <h1 class="logo">FoodieServes</h1>
+        <ul class="nav-links" id="navLinks">
+            <li><a href="finalp.html">Home</a></li>
+            <li><a href="#">Menu</a></li>
+            <li><a href="#menu">About</a></li>
+            <li><a href="#">Contact</a></li>
+        </ul>
+        <div class="menu-toggle" onclick="toggleMenu()">
+            <i class="fa fa-bars"></i>
+        </div>
+        <div class="nav-right">
+            <a href="cart.html" class="cart-icon">
+                <i class="fa fa-shopping-cart"></i>
+                <span class="cart-count">0</span>
+            </a>
+        </div>
+    </nav>
+
+    <!-- Cart Section -->
+    <section class="cart-section">
+        <h2>Your Shopping Cart</h2>
+        <div class="cart-container">
+            <div id="cartItems">
+                <!-- Cart items will be displayed here -->
+            </div>
+            <div class="cart-summary">
+                <h3>Order Summary</h3>
+                <div class="summary-item">
+                    <span>Subtotal:</span>
+                    <span id="subtotal">₹0.00</span>
+                </div>
+                <div class="summary-item">
+                    <span>Delivery Fee:</span>
+                    <span id="deliveryFee">₹40.00</span>
+                </div>
+                <div class="summary-item total">
+                    <span>Total:</span>
+                    <span id="total">₹0.00</span>
+                </div>
+                <button class="checkout-btn" onclick="proceedToCheckout()">Proceed to Checkout</button>
+            </div>
+        </div>
+    </section>  
+
+    <!-- Footer -->
+    <footer>
+        <p>© 2024 FoodieServes. All rights reserved.</p>
+    </footer>
+</body>
+</html>     

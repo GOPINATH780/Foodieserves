@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - FoodieServes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: url(images/cover.jpg) no-repeat;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .wrapper {
+            width: 420px;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, .2);
+            backdrop-filter: blur(20px);
+            box-shadow: 0 0 10px rgba(0, 0, 0, .2);
+            color: #fff;
+            border-radius: 10px;
+            padding: 30px 40px;
+        }
+
+        .wrapper h1 {
+            font-size: 36px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .wrapper .input-box {
+            position: relative;
+            width: 100%;
+            height: 50px;
+            margin: 30px 0;
+        }
+
+        .input-box input {
+            width: 100%;
+            height: 100%;
+            background: transparent;
+            border: none;
+            outline: none;
+            border: 2px solid rgba(255, 255, 255, .2);
+            border-radius: 40px;
+            font-size: 16px;
+            color: #fff;
+            padding: 20px 45px 20px 20px;
+        }
+
+        .input-box input::placeholder {
+            color: #fff;
+        }
+
+        .input-box i {
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 20px;
+        }
+
+        .wrapper .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            font-size: 14.5px;
+            margin: -15px 0 15px;
+        }
+
+        .remember-forgot label input {
+            accent-color: #fff;
+            margin-right: 3px;
+        }
+
+        .remember-forgot a {
+            color: #fff;
+            text-decoration: none;
+        }
+
+        .remember-forgot a:hover {
+            text-decoration: underline;
+        }
+
+        .wrapper .btn {
+            width: 100%;
+            height: 45px;
+            background: #fff;
+            border: none;
+            outline: none;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, .1);
+            cursor: pointer;
+            font-size: 16px;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 20px;
+        }
+
+        .wrapper .register-link {
+            font-size: 14.5px;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .register-link p a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .register-link p a:hover {
+            text-decoration: underline;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            padding: 15px 25px;
+            border-radius: 8px;
+            color: white;
+            font-weight: 500;
+            transform: translateX(150%);
+            animation: slideIn 0.5s forwards;
+            z-index: 1000;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+        }
+
+        .notification.success {
+            background: linear-gradient(45deg, #28a745, #20c997);
+        }
+
+        .notification.error {
+            background: linear-gradient(45deg, #dc3545, #ff4757);
+        }
+
+        @keyframes slideIn {
+            to {
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes fadeOut {
+            to {
+                opacity: 0;
+            }
+        }
+
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 1;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.4);
+        }
+
+        .modal-content {
+            background-color: #fefefe;
+            margin: 15% auto;
+            padding: 20px;
+            border: 1px solid #888;
+            width: 80%;
+            max-width: 400px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .close {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        .close:hover {
+            color: black;
+        }
+
+        .modal-content input {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            box-sizing: border-box;
+        }
+
+        .modal-content button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .modal-content button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrapper">
+        <h1>Login</h1>
+        <form id="loginForm">
+            <div class="input-box">
+                <input type="email" id="email" placeholder="Email" required>
+            </div>
+            <div class="input-box">
+                <input type="password" id="password" placeholder="Password" required>
+            </div>
+            <div class="remember-forgot">
+                <label><input type="checkbox"> Remember me</label>
+                <a href="#" onclick="showForgotPasswordModal()" style="color: #4CAF50; text-decoration: none;">Forgot Password?</a>
+            </div>
+            <button type="submit" class="btn">Login</button>
+            <div class="register-link">
+                <p>Don't have an account? <a href="register.html">Register</a></p>
+            </div>
+        </form>
+    </div>
+
+    <div id="forgotPasswordModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close" onclick="closeForgotPasswordModal()">&times;</span>
+            <h2>Reset Password</h2>
+            <p>Enter your email address to receive a password reset link.</p>
+            <input type="email" id="resetEmail" placeholder="Enter your email" required>
+            <button onclick="sendResetLink()">Send Reset Link</button>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+
+            const formData = {
+                email: document.getElementById('email').value.trim(),
+                password: document.getElementById('password').value
+            };
+
+            try {
+                const response = await fetch('http://localhost:3000/login', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify(formData)
+                });
+
+                const data = await response.json();
+
+                if (data.success) {
+                    sessionStorage.setItem('userEmail', data.user.email);
+                    sessionStorage.setItem('userName', data.user.name);
+                    sessionStorage.setItem('userPhone', data.user.phone);
+                    sessionStorage.setItem('userAddress', data.user.address);
+                    
+                    showNotification('Login successful!', 'success');
+                    setTimeout(() => {
+                        window.location.href = 'finalp.html';
+                    }, 1500);
+                } else {
+                    showNotification(data.message || 'Login failed', 'error');
+                }
+            } catch (error) {
+                console.error('Login error:', error);
+                showNotification('Login failed: ' + (error.message || 'Please try again'), 'error');
+            }
+        });
+
+        function showNotification(message, type = 'success') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+
+            setTimeout(() => {
+                notification.style.animation = 'fadeOut 0.5s forwards';
+                setTimeout(() => {
+                    notification.remove();
+                }, 500);
+            }, 3000);
+        }
+
+        function showForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').style.display = 'block';
+        }
+
+        function closeForgotPasswordModal() {
+            document.getElementById('forgotPasswordModal').style.display = 'none';
+        }
+
+        async function sendResetLink() {
+            const email = document.getElementById('resetEmail').value;
+            
+            try {
+                const response = await fetch('http://localhost:3000/api/reset-password', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ email })
+                });
+
+                const data = await response.json();
+                
+                if (data.success) {
+                    showNotification('Password reset link sent to your email!', 'success');
+                    closeForgotPasswordModal();
+                } else {
+                    showNotification(data.message || 'Failed to send reset link', 'error');
+                }
+            } catch (error) {
+                showNotification('Error sending reset link', 'error');
+            }
+        }
+
+        // Close modal when clicking outside
+        window.onclick = function(event) {
+            const modal = document.getElementById('forgotPasswordModal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+</html> 

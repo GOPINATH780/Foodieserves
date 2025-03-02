@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Status</title>
+    <style>
+        .otp-container {
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            text-align: center;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            border-radius: 8px;
+            background-color: white;
+        }
+        .otp-input {
+            width: 200px;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 16px;
+            text-align: center;
+            letter-spacing: 2px;
+        }
+        .verify-btn, .resend-btn {
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .resend-btn {
+            background-color: #2196F3;
+        }
+        .verify-btn:hover {
+            background-color: #45a049;
+        }
+        .resend-btn:hover {
+            background-color: #1976D2;
+        }
+        .notification {
+            margin-top: 10px;
+            padding: 10px;
+            border-radius: 4px;
+        }
+        .success { background-color: #dff0d8; color: #3c763d; }
+        .error { background-color: #f2dede; color: #a94442; }
+        .email-info {
+            color: #666;
+            margin: 10px 0;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="otp-container">
+        <h2>Verify Delivery OTP</h2>
+        <p class="email-info">An OTP has been sent to your registered email address</p>
+        <input type="text" id="otp-input" class="otp-input" placeholder="Enter OTP" maxlength="6">
+        <div>
+            <button onclick="verifyOTP()" class="verify-btn">Verify OTP</button>
+            <button onclick="resendOTP()" class="resend-btn">Resend OTP</button>
+        </div>
+        <div id="notification"></div>
+    </div>
+
+    <script>
+        const orderId = new URLSearchParams(window.location.search).get('orderId');
+
+        const transporter = nodemailer.createTransport({
+            service: 'gmail',
+            auth: {
+                user: 'jackgopi612@gmail.com',
+                pass: 'gkpa ajzq zdml yyfz'
+            }
+        });
+
+        async function verifyOTP() {
+            const otp = document.getElementById('otp-input').value;
+            
+            try {
+                const response = await fetch(`http://localhost:3000/api/orders/${orderId}/verify-otp`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ otp })
+                });
+
+                const data = await response.json();
+                showNotification(data.message, data.success);
+                
+                if (data.success) {
+                    setTimeout(() => {
+                        window.location.href = 'finalp.html';
+                    }, 2000);
+                }
+            } catch (error) {
+                showNotification('Failed to verify OTP', false);
+            }
+        }
+
+        async function resendOTP() {
+            try {
+                const response = await fetch(`http://localhost:3000/api/orders/${orderId}/generate-otp`, {
+                    method: 'POST'
+                });
+
+                const data = await response.json();
+                showNotification(data.message, data.success);
+            } catch (error) {
+                showNotification('Failed to resend OTP', false);
+            }
+        }
+
+        function showNotification(message, isSuccess) {
+            const notification = document.getElementById('notification');
+            notification.className = `notification ${isSuccess ? 'success' : 'error'}`;
+            notification.textContent = message;
+        }
+    </script>
+</body>
+</html> 
